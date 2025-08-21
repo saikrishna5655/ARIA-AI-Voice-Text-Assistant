@@ -110,6 +110,9 @@ Keep responses conversational and natural for voice interaction.`;
       const data = await response.json();
       const imageUrl = data.imageUrl || `https://via.placeholder.com/512?text=Generated+Image`;
 
+      // Log the response for debugging
+      console.log('Image generation response:', data);
+
       return {
         text: `I've created an image based on your description: "${imageDescription}". Here it is!`,
         imageUrl
