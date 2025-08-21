@@ -96,7 +96,7 @@ function App() {
         </div>
       </header>
 
-      {/* Main Content */}
+      {/* Updated Main Content */}
       <main className="max-w-4xl mx-auto px-4 py-6 h-[calc(100vh-100px)] flex flex-col">
         {/* Status Bar */}
         <div className="mb-6 flex justify-center">
@@ -109,12 +109,12 @@ function App() {
         </div>
 
         {/* Chat Interface */}
-        <div className="flex-1 bg-gradient-to-br from-blue-50 via-white to-purple-50 rounded-xl shadow-lg border border-gray-200 overflow-hidden mb-6">
+        <div className="flex-1 bg-gray-100 rounded-xl shadow-lg border border-gray-300 overflow-hidden mb-6">
           <div className="flex flex-col h-full">
             <div className="flex-1 overflow-y-auto p-4" id="chat-container">
               <MessageList messages={messages} />
             </div>
-            <div className="p-4 bg-white border-t border-gray-200">
+            <div className="p-4 bg-white border-t border-gray-300">
               <TextInput
                 onSendMessage={handleTextMessage}
                 disabled={!isSupported}
