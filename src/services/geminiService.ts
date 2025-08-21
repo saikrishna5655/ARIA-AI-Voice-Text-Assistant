@@ -108,7 +108,7 @@ Keep responses conversational and natural for voice interaction.`;
       }
 
       const data = await response.json();
-      const imageUrl = data.imageUrl || `https://picsum.photos/512/512?random=${Date.now()}`;
+      const imageUrl = data.imageUrl || `https://via.placeholder.com/512?text=Generated+Image`;
 
       return {
         text: `I've created an image based on your description: "${imageDescription}". Here it is!`,
