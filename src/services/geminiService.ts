@@ -108,11 +108,8 @@ Keep responses conversational and natural for voice interaction.`;
       }
 
       const data = await response.json();
-      
-      // For now, we'll use a placeholder image service since Gemini doesn't directly generate images
-      // In a real implementation, you'd integrate with DALL-E, Midjourney, or Stable Diffusion
-      const imageUrl = `https://picsum.photos/512/512?random=${Date.now()}`;
-      
+      const imageUrl = data.imageUrl || `https://picsum.photos/512/512?random=${Date.now()}`;
+
       return {
         text: `I've created an image based on your description: "${imageDescription}". Here it is!`,
         imageUrl
