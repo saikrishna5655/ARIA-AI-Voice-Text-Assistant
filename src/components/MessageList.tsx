@@ -80,6 +80,13 @@ const MessageList: React.FC<MessageListProps> = ({ messages }) => {
                   className="max-w-full h-auto rounded-lg shadow-md"
                   loading="lazy"
                 />
+                <a
+                  href={message.imageUrl}
+                  download="generated-image.jpg"
+                  className="text-blue-500 hover:underline text-sm mt-2"
+                >
+                  Download Image
+                </a>
               </div>
             )}
             
