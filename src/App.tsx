@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useVoiceAssistant } from './hooks/useVoiceAssistant';
 import VoiceButton from './components/VoiceButton';
 import MessageList from './components/MessageList';
@@ -54,6 +54,14 @@ function App() {
     setError(null);
   };
 
+  // Scroll to bottom effect
+  useEffect(() => {
+    const chatContainer = document.getElementById('chat-container');
+    if (chatContainer) {
+      chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
+  }, [messages]);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
       {/* Header */}
@@ -89,7 +97,7 @@ function App() {
       </header>
 
       {/* Main Content */}
-      <main className="max-w-3xl mx-auto px-4 py-6 h-[calc(100vh-100px)] flex flex-col">
+      <main className="max-w-4xl mx-auto px-4 py-6 h-[calc(100vh-100px)] flex flex-col">
         {/* Status Bar */}
         <div className="mb-6 flex justify-center">
           <StatusIndicator
@@ -100,27 +108,19 @@ function App() {
           />
         </div>
 
-        {/* Messages and Image Box */}
-        <div className="flex-1 bg-white rounded-xl shadow-lg border border-gray-200 flex flex-row overflow-hidden mb-6">
-          <div className="flex-1 flex flex-col">
-            <MessageList messages={messages} />
-            <TextInput
-              onSendMessage={handleTextMessage}
-              disabled={!isSupported}
-              isProcessing={isProcessing}
-            />
-          </div>
-          <div className="w-1/3 bg-gray-50 border-l border-gray-200 p-4">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">Generated Image</h3>
-            {messages.some((msg) => msg.imageUrl) ? (
-              <img
-                src={messages.find((msg) => msg.imageUrl)?.imageUrl}
-                alt="Generated content"
-                className="w-full h-auto rounded-lg shadow-md"
+        {/* Chat Interface */}
+        <div className="flex-1 bg-gradient-to-br from-blue-50 via-white to-purple-50 rounded-xl shadow-lg border border-gray-200 overflow-hidden mb-6">
+          <div className="flex flex-col h-full">
+            <div className="flex-1 overflow-y-auto p-4" id="chat-container">
+              <MessageList messages={messages} />
+            </div>
+            <div className="p-4 bg-white border-t border-gray-200">
+              <TextInput
+                onSendMessage={handleTextMessage}
+                disabled={!isSupported}
+                isProcessing={isProcessing}
               />
-            ) : (
-              <p className="text-sm text-gray-500">No image generated yet.</p>
-            )}
+            </div>
           </div>
         </div>
 
