@@ -89,7 +89,7 @@ function App() {
       </header>
 
       {/* Main Content */}
-      <main className="max-w-4xl mx-auto px-4 py-6 h-[calc(100vh-80px)] flex flex-col">
+      <main className="max-w-3xl mx-auto px-4 py-6 h-[calc(100vh-100px)] flex flex-col">
         {/* Status Bar */}
         <div className="mb-6 flex justify-center">
           <StatusIndicator
@@ -100,14 +100,28 @@ function App() {
           />
         </div>
 
-        {/* Messages */}
-        <div className="flex-1 bg-white rounded-xl shadow-lg border border-gray-200 flex flex-col overflow-hidden mb-6">
-          <MessageList messages={messages} />
-          <TextInput
-            onSendMessage={handleTextMessage}
-            disabled={!isSupported}
-            isProcessing={isProcessing}
-          />
+        {/* Messages and Image Box */}
+        <div className="flex-1 bg-white rounded-xl shadow-lg border border-gray-200 flex flex-row overflow-hidden mb-6">
+          <div className="flex-1 flex flex-col">
+            <MessageList messages={messages} />
+            <TextInput
+              onSendMessage={handleTextMessage}
+              disabled={!isSupported}
+              isProcessing={isProcessing}
+            />
+          </div>
+          <div className="w-1/3 bg-gray-50 border-l border-gray-200 p-4">
+            <h3 className="text-lg font-semibold text-gray-800 mb-4">Generated Image</h3>
+            {messages.some((msg) => msg.imageUrl) ? (
+              <img
+                src={messages.find((msg) => msg.imageUrl)?.imageUrl}
+                alt="Generated content"
+                className="w-full h-auto rounded-lg shadow-md"
+              />
+            ) : (
+              <p className="text-sm text-gray-500">No image generated yet.</p>
+            )}
+          </div>
         </div>
 
         {/* Voice Control */}
